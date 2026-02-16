@@ -795,8 +795,19 @@ function renderPracticeExercise(exercise) {
         .map(m => '<li>' + m.label + ': <strong>' + m.value + '</strong></li>')
         .join('');
     
-    // Usar unidades apropiadas según el tema
-    const unit = (currentTheme === 'functions' || currentTheme === 'inequalities' || currentTheme === 'absolute-value' || currentTheme === 'intervals') ? '' : ' cm²';
+    // Usar unidades apropiadas según el tema y tipo de ejercicio
+    let unit = '';
+    if (currentTheme === 'geometry') {
+        // Verificar si es una figura 3D y si el ejercicio es de volumen
+        const isVolumeExercise = exercise.question && exercise.question.toLowerCase().includes('volumen');
+        const is3DFigure = exercise.figureName && geometryData.find(g => g.name === exercise.figureName && g.figure3D);
+        
+        if (isVolumeExercise && is3DFigure) {
+            unit = ' cm³';
+        } else {
+            unit = ' cm²';
+        }
+    }
     
     // Para inecuaciones, intervalos y valor absoluto, las opciones pueden ser strings, no números
     const isStringAnswer = currentTheme === 'inequalities' || currentTheme === 'intervals' || currentTheme === 'absolute-value';
@@ -943,7 +954,17 @@ function handlePracticeAnswer(value, btnIndex) {
     fb.classList.remove('correct-fb', 'wrong-fb', 'visible');
     void fb.offsetWidth; // Force reflow
 
-    const unit = (currentTheme === 'functions' || currentTheme === 'inequalities') ? '' : ' cm²';
+    const unit = (currentTheme === 'functions' || currentTheme === 'inequalities' || currentTheme === 'absolute-value' || currentTheme === 'intervals') ? '' : ' cm²';
+    
+    // Para geometría, verificar si es ejercicio de volumen en figura 3D
+    if (currentTheme === 'geometry' && currentExercise) {
+        const isVolumeExercise = currentExercise.question && currentExercise.question.toLowerCase().includes('volumen');
+        const is3DFigure = currentExercise.figureName && geometryData.find(g => g.name === currentExercise.figureName && g.figure3D);
+        
+        if (isVolumeExercise && is3DFigure) {
+            unit = ' cm³';
+        }
+    }
 
     if (isCorrect) {
         fb.classList.add('correct-fb', 'visible');
