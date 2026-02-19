@@ -431,9 +431,9 @@ h2 {
 }
 
 .parcial-btn.active[data-parcial="2"] {
-    background: #f3e5f5;
-    border-color: #9c27b0;
-    color: #4a148c;
+    background: #9c27b0;
+    border-color: #7b1fa2;
+    color: white;
 }
 
 .parcial-btn:hover:not(.active) {

@@ -27,20 +27,8 @@
         </div>
         <h2>Creado por Isaac Garcia</h2>
         
-        <!-- Selector de parcial -->
-        <div class="parcial-selector">
-            <button class="parcial-btn active" data-parcial="1">
-                <span class="parcial-icon">📘</span>
-                <span class="parcial-text">1er Parcial</span>
-            </button>
-            <button class="parcial-btn" data-parcial="2">
-                <span class="parcial-icon">📗</span>
-                <span class="parcial-text">2do Parcial</span>
-            </button>
-        </div>
-        
         <!-- Selector de tema (Funciones / Inecuaciones / Geometría / Valor Absoluto / Intervalos) -->
-        <div class="theme-selector" id="themeSelector1">
+        <div class="theme-selector">
             <button id="functionsBtn" class="theme-btn" data-theme="functions">
                 <span class="theme-icon">📊</span>
                 <span class="theme-text">Funciones</span>
@@ -50,7 +38,7 @@
                 <span class="theme-text">Inecuaciones</span>
             </button>
             <button id="geometryBtn" class="theme-btn active" data-theme="geometry">
-                <span class="theme-icon">📐</span>
+                <span class="theme-icon">�</span>
                 <span class="theme-text">Geometría</span>
             </button>
             <button id="absoluteValueBtn" class="theme-btn" data-theme="absolute-value">
@@ -60,30 +48,6 @@
             <button id="intervalsBtn" class="theme-btn" data-theme="intervals">
                 <span class="theme-icon">🔷</span>
                 <span class="theme-text">Intervalos</span>
-            </button>
-        </div>
-        
-        <!-- Selector de tema (Parcial 2) -->
-        <div class="theme-selector" id="themeSelector2" style="display: none;">
-            <button id="logaritmosBtn" class="theme-btn" data-theme="logaritmos">
-                <span class="theme-icon">log</span>
-                <span class="theme-text">Logaritmos</span>
-            </button>
-            <button id="trigonometriaBtn" class="theme-btn" data-theme="trigonometria">
-                <span class="theme-icon">〰️</span>
-                <span class="theme-text">Trigonometría</span>
-            </button>
-            <button id="vectoresBtn" class="theme-btn" data-theme="vectores">
-                <span class="theme-icon">→</span>
-                <span class="theme-text">Vectores</span>
-            </button>
-            <button id="homograficasBtn" class="theme-btn" data-theme="homograficas">
-                <span class="theme-icon">÷</span>
-                <span class="theme-text">Homográficas</span>
-            </button>
-            <button id="inyectivasBtn" class="theme-btn" data-theme="inyectivas">
-                <span class="theme-icon">↔️</span>
-                <span class="theme-text">Inyect./Sobreyect.</span>
             </button>
         </div>
         
@@ -104,17 +68,13 @@
             <div class="scoreboard">
                 <div class="score-item">
                     <div class="score-label">Aciertos</div>
-                    <div class="score-value" id="correctCount">0</div>
-                </div>
-                <div class="score-item">
-                    <div class="score-label">Precisión</div>
                     <div class="score-value" id="accuracy">0%</div>
                 </div>
                 <div class="score-item">
                     <div class="score-label">Racha</div>
                     <div class="streak-value" id="streak">
                         <img src="fueguito.png" class="fire-emoji" alt="Racha">
-                        <span id="streakCount" class="score-value">0</span>
+                        <span id="streakCount">0</span>
                     </div>
                 </div>
             </div>
@@ -145,29 +105,6 @@
             </div>
             <div class="buttons">
                 <button id="newGameBtn">🔄 Nuevo Juego</button>
-            </div>
-        </div>
-
-        <!-- Modals -->
-        <div id="figuresModal" class="modal">
-            <div class="modal-content">
-                <button class="modal-close" id="closeFiguresModal">×</button>
-                <div class="modal-header">
-                    <h2 class="modal-title">📐 Galería Completa</h2>
-                    <p class="modal-subtitle">Haz clic en cualquier figura para ver su fórmula detallada</p>
-                </div>
-                <div id="figuresGallery" class="figures-gallery"></div>
-            </div>
-        </div>
-
-        <div id="formulasModal" class="modal">
-            <div class="modal-content">
-                <button class="modal-close" id="closeFormulasModal">×</button>
-                <div class="modal-header">
-                    <h2 class="modal-title">📝 Guía Completa de Fórmulas</h2>
-                    <p class="modal-subtitle">Fórmulas detalladas con explicaciones, ejemplos y figuras</p>
-                </div>
-                <div id="formulasList" class="formulas-list"></div>
             </div>
         </div>
 
@@ -220,8 +157,56 @@
             </div>
         </div>
     </div>
+
+    <!-- Scripts - ORDEN CRÍTICO CON DEFER PARA MÓVILES -->
+    <!-- DEFER asegura que se carguen en orden y después del HTML -->
     
-    <!-- ES Module Principal -->
-    <script type="module" src="app.js"></script>
-</body>
+    <!-- 1. Datos (deben cargarse primero) -->
+    <script defer src="data.js"></script>
+    <script defer src="functions-data.js"></script>
+    <script defer src="inequalities-data.js"></script>
+    <script defer src="absolute-value-data.js"></script>
+    <script defer src="intervals-data.js"></script>
+    
+    <!-- 2. Ejercicios Practice (usan los datos) -->
+    <script defer src="practice.js"></script>
+    <script defer src="functions-practice-new.js"></script>
+    <script defer src="inequalities-practice.js"></script>
+    <script defer src="absolute-value-practice.js"></script>
+    
+    <!-- 3. Figuras 3D (SVG estático para geometría) -->
+    <script defer src="geometry-figures-svg.js"></script>
+    
+    <!-- 4. Generador de ejercicios completo -->
+    <script defer src="generador_ejercicios.js"></script>
+    
+    <!-- 5. Módulos de la aplicación -->
+    <script defer src="audio.js"></script>
+    <script defer src="themes.js"></script>
+    
+    <!-- 6. App principal (último, usa todo lo anterior) -->
+    <script defer src="app.js"></script>
+    
+    <!-- 7. FALLBACK: Forzar inicialización si falla DOMContentLoaded -->
+    <script>
+    window.addEventListener('load', function() {
+        console.log('🔄 window.load ejecutado');
+        // Si después de 2 segundos las cards siguen vacías, forzar
+        setTimeout(function() {
+            const figures = document.getElementById('figures');
+            if (figures && figures.innerHTML.trim() === '') {
+                console.log('⚠️ FALLBACK: Cards vacías, forzando newGame()');
+                if (typeof newGame === 'function') {
+                    newGame();
+                } else {
+                    console.error('❌ newGame() no existe');
+                }
+            } else {
+                console.log('✅ Cards OK');
+            }
+        }, 2000);
+    });
+    </script>
+    
+    </body>
 </html>
