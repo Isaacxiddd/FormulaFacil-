@@ -2,7 +2,7 @@
 // DATOS DE FIGURAS GEOMÉTRICAS
 // ══════════════════════════════════════════════════════════════
 
-export const geometryData = [
+export const logaritmosData = [
     // Figuras 2D
     {
         name: "Cuadrado",
@@ -245,7 +245,7 @@ const figureTips = {
 // DATOS COMPLETOS DE FÓRMULAS CON EXPLICACIONES Y EJERCICIOS
 // ══════════════════════════════════════════════════════════════
 
-export const formulasData = [
+export const logaritmosFormulasData = [
     {
         name: "Cuadrado",
         formulas: ["A = l^2", "P = 4l"],

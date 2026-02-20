@@ -159,7 +159,7 @@ export function initializeRouter() {
         onThemeChange('inyectivas');
     });
     
-    // Configurar// Event listeners para modales y botones de tema y modo
+    // Configurar event listeners para modales y botones de tema y modo
     document.getElementById('figuresTitle').addEventListener('click', () => import('./ui.js').then(ui => ui.openFiguresModal()));
     document.getElementById('formulasTitle').addEventListener('click', () => import('./ui.js').then(ui => ui.openFormulasModal()));
     

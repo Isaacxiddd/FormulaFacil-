@@ -26,6 +26,13 @@ async function initializeApp() {
         // Esperar un momento para que todo se cargue
         await new Promise(resolve => setTimeout(resolve, 200));
         
+        // Forzar carga del tema por defecto
+        const { getThemeConfig } = await import('./core/themes.js');
+        const { mutations } = await import('./core/state.js');
+        const themeConfig = getThemeConfig('geometry');
+        mutations.setDataSource(themeConfig.data);
+        console.log('🎯 Tema geometry forzado:', themeConfig.data?.length);
+        
         // Iniciar juego en modo classic por defecto
         newGame();
         console.log('🎮 Juego iniciado');
@@ -40,13 +47,9 @@ async function initializeApp() {
 // INICIO DE LA APLICACIÓN
 // ══════════════════════════════════════════════════════════════
 
-document.addEventListener('DOMContentLoaded', initializeApp);
-
-// ══════════════════════════════════════════════════════════════
-// SWITCHER DE PARCIALES
-// ══════════════════════════════════════════════════════════════
-
 document.addEventListener('DOMContentLoaded', () => {
+    initializeApp();
+    
     const selector1 = document.getElementById('themeSelector1');
     const selector2 = document.getElementById('themeSelector2');
 
