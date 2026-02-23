@@ -288,7 +288,10 @@ function renderFiguresGallery(scrollToIndex = null) {
         figureItem.addEventListener('click', () => {
             closeFiguresModal();
             setTimeout(() => {
-                openFormulasModal(index);
+                // Buscar el índice correcto de la fórmula por nombre
+                const formulasSource = getFormulasSource(gameState.currentTheme);
+                const formulaIndex = formulasSource.findIndex(formula => formula.name === item.name);
+                openFormulasModal(formulaIndex);
             }, 300);
         });
         
@@ -329,7 +332,8 @@ function renderFormulasList(scrollToIndex = null) {
         formulaDetail.dataset.index = index;
         formulaDetail.id = `formula-detail-${index}`;
         
-        const relatedItem = gameState.currentDataSource[index];
+        // Buscar la figura relacionada por nombre en lugar de por índice
+        const relatedItem = gameState.currentDataSource.find(item => item.name === formula.name);
         let figurePreview = '';
         
         if (gameState.currentTheme === 'geometry') {
