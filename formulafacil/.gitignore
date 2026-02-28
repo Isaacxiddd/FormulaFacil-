@@ -1,0 +1,90 @@
+# .gitignore para FormulaFacil UTN
+# Archivos y directorios que no deben subirse a GitHub
+
+# Archivos de deploy y temporales
+*.zip
+*.tar.gz
+*.rar
+deploy-*
+*-deploy.*
+*-ready.*
+*-instructions.*
+
+# Scripts de automatización
+*.ps1
+*.bat
+*.sh
+
+# Archivos de configuración local
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Node.js (si se usa en el futuro)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de build y dist
+build/
+dist/
+out/
+
+# Archivos de backup y versiones viejas
+*-old.*
+*-backup.*
+*-broken.*
+*-temp.*
+*-copy.*
+
+# Archivos de datos generados
+*.cache
+*.tmp
+*.temp
+
+# Archivos de configuración de entorno
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Archivos de documentación temporales
+TODO.md
+NOTES.md
+DRAFT.md
+
+# Archivos de testing
+test/
+tests/
+coverage/
+.nyc_output/
+
+# Archivos específicos del proyecto (si existen)
+formulafacil.code-workspace
+github-push.txt
+DESCRIPTION.md
+
+# Mantener solo los archivos esenciales del proyecto
+# Permitir:
+# - README.md
+# - index.html
+# - styles.css
+# - app.js
+# - core/
+# - modules/
+# - audio/
+# - assets/ (imágenes)
+# - *.png (logos y recursos)
