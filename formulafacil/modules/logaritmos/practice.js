@@ -2,7 +2,7 @@
 // PRÁCTICA - LOGARITMOS (Segundo Parcial)
 // ══════════════════════════════════════════════════════════════
 
-import { shuffle, pickRandom } from '../../../core/utils.js';
+import { shuffle, pickRandom } from '../../core/utils.js';
 
 const exercises = {
     easy: [

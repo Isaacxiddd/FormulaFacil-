@@ -14,7 +14,7 @@ export const gameState = {
     
     // SISTEMA DE MODOS Y TEMAS
     currentMode: 'classic',
-    currentTheme: 'geometry',
+    currentTheme: null,
     currentDataSource: null,
     currentDifficulty: 'medium',
     
@@ -61,10 +61,15 @@ export const mutations = {
     },
     
     setTheme(theme) {
+        console.log('🔄 setTheme llamado con:', theme);
+        console.log('🔄 Tema anterior:', gameState.currentTheme);
         gameState.currentTheme = theme;
+        console.log('🔄 Tema nuevo:', gameState.currentTheme);
     },
     
     setDataSource(source) {
+        console.log('🔄 setDataSource llamado con:', source?.length, 'items');
+        console.log('🔄 Tipo de source:', typeof source);
         gameState.currentDataSource = source;
     },
     

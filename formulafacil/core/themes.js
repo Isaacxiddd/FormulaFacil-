@@ -100,10 +100,33 @@ export const themes = {
 };
 
 export function getThemeConfig(theme) {
-    return themes[theme] || themes.geometry;
+    console.log('🎯 getThemeConfig llamado con:', theme);
+    console.log('🎯 Temas disponibles:', Object.keys(themes));
+    console.log('🎯 Config encontrada:', themes[theme]);
+    
+    if (!theme) {
+        console.log('❌ No se proporcionó tema - devolviendo null');
+        return null;
+    }
+    
+    if (!themes[theme]) {
+        console.log('❌ Tema no encontrado:', theme, '- devolviendo null');
+        return null;
+    }
+    
+    const config = themes[theme];
+    console.log('🎯 Data length:', config.data?.length);
+    console.log('🎯 Data sample:', config.data?.[0]);
+    console.log('🎯 Formulas length:', config.formulas?.length);
+    console.log('🎯 Formulas sample:', config.formulas?.[0]);
+    
+    return config;
 }
 
 export function getFormulasSource(theme) {
     const config = getThemeConfig(theme);
+    console.log('🎯 Data length:', config.data?.length);
+    console.log('🎯 Data sample:', config.data?.[0]);
+    
     return config.formulas;
 }

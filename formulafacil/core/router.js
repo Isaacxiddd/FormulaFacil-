@@ -52,19 +52,28 @@ export function switchToClassic() {
     document.getElementById('classicView').style.display = 'block';
     document.getElementById('practiceView').style.display = 'none';
     hideTip();
-    newGame();
+    
+    // Solo iniciar juego si hay un tema seleccionado
+    if (gameState.currentTheme && gameState.currentDataSource) {
+        newGame();
+    }
 }
 
 // ══════════════════════════════════════════════════════════════
 // CAMBIO DE TEMA
 // ══════════════════════════════════════════════════════════════
 
-export function onThemeChange(newTheme = null) {
+export async function onThemeChange(newTheme = null) {
+    console.log('🎯 onThemeChange llamado con:', newTheme);
+    
     // Si no se pasa tema, obtener del select (para compatibilidad)
     if (!newTheme) {
         const sel = document.getElementById('themeSelect');
         newTheme = sel ? sel.value : gameState.currentTheme;
     }
+    
+    console.log('🎯 Tema final a cambiar:', newTheme);
+    console.log('🎯 Tema actual:', gameState.currentTheme);
     
     if (newTheme === gameState.currentTheme) return;
     
@@ -80,7 +89,45 @@ export function onThemeChange(newTheme = null) {
     
     // Cargar datos del tema
     const themeConfig = getThemeConfig(newTheme);
+    
+    if (!themeConfig) {
+        console.error('❌ No se encontró configuración para el tema:', newTheme);
+        return;
+    }
+    
     mutations.setDataSource(themeConfig.data);
+    
+    // Esperar un momento para que los datos se carguen completamente
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
+    console.log('🎯 DataSource actualizado:', gameState.currentDataSource?.length);
+    
+    // 🛡️ GUARDRAIL: Validar que los datos corresponden al tema
+    if (!gameState.currentDataSource || gameState.currentDataSource.length === 0) {
+        console.error('❌ Error: No se cargaron datos para el tema:', newTheme);
+        return;
+    }
+    
+    const firstItemName = gameState.currentDataSource[0]?.name?.toLowerCase() || '';
+    const themeName = newTheme.toLowerCase();
+    
+    console.log('🛡️ Guardrail - Primer item:', firstItemName);
+    console.log('🛡️ Guardrail - Tema esperado:', themeName);
+    
+    // Validación específica para logaritmos
+    if (themeName === 'logaritmos' && !firstItemName.includes('logaritmo') && !firstItemName.includes('log')) {
+        console.error('❌ ERROR CRÍTICO: Los datos no corresponden a logaritmos. Primer item:', firstItemName);
+        console.error('❌ Posible mezcla de datos o tema incorrecto');
+        return;
+    }
+    
+    // Validación específica para geometría
+    if (themeName === 'geometry' && !firstItemName.includes('cuadrado') && !firstItemName.includes('triángulo') && !firstItemName.includes('círculo')) {
+        console.error('❌ ERROR CRÍTICO: Los datos no corresponden a geometría. Primer item:', firstItemName);
+        return;
+    }
+    
+    console.log('✅ Guardrail validado - Datos correctos para el tema:', newTheme);
     
     // Actualizar instrucciones
     const instruction = document.getElementById('instructionText');
@@ -139,25 +186,53 @@ export function initializeRouter() {
     });
     
     // Event listeners para botones del Parcial 2
-    document.getElementById('logaritmosBtn').addEventListener('click', () => {
-        onThemeChange('logaritmos');
-    });
+    console.log('🔍 Buscando botones del Parcial 2...');
+    const trigonometriaBtn = document.getElementById('trigonometriaBtn');
+    const vectoresBtn = document.getElementById('vectoresBtn');
+    const homograficasBtn = document.getElementById('homograficasBtn');
+    const inyectivasBtn = document.getElementById('inyectivasBtn');
     
-    document.getElementById('trigonometriaBtn').addEventListener('click', () => {
-        onThemeChange('trigonometria');
-    });
+    console.log('🔍 Botones encontrados:');
+    console.log('  trigonometriaBtn:', trigonometriaBtn);
+    console.log('  vectoresBtn:', vectoresBtn);
+    console.log('  homograficasBtn:', homograficasBtn);
+    console.log('  inyectivasBtn:', inyectivasBtn);
     
-    document.getElementById('vectoresBtn').addEventListener('click', () => {
-        onThemeChange('vectores');
-    });
+    if (trigonometriaBtn) {
+        trigonometriaBtn.addEventListener('click', async () => {
+            console.log('🎯 Clic en trigonometriaBtn - cambiando a trigonometria');
+            await onThemeChange('trigonometria');
+        });
+    } else {
+        console.error('❌ No se encontró el botón trigonometriaBtn');
+    }
     
-    document.getElementById('homograficasBtn').addEventListener('click', () => {
-        onThemeChange('homograficas');
-    });
+    if (vectoresBtn) {
+        vectoresBtn.addEventListener('click', async () => {
+            console.log('🎯 Clic en vectoresBtn - cambiando a vectores');
+            await onThemeChange('vectores');
+        });
+    } else {
+        console.error('❌ No se encontró el botón vectoresBtn');
+    }
     
-    document.getElementById('inyectivasBtn').addEventListener('click', () => {
-        onThemeChange('inyectivas');
-    });
+    if (homograficasBtn) {
+        homograficasBtn.addEventListener('click', async () => {
+            console.log('🎯 Clic en homograficasBtn - cambiando a homograficas');
+            await onThemeChange('homograficas');
+        });
+    } else {
+        console.error('❌ No se encontró el botón homograficasBtn');
+    }
+    
+    if (inyectivasBtn) {
+        inyectivasBtn.addEventListener('click', async () => {
+            console.log('🎯 Clic en inyectivasBtn - cambiando a inyectivas');
+            await onThemeChange('inyectivas');
+        });
+    } else {
+        console.error('❌ No se encontró el botón inyectivasBtn');
+    }
     
     // Configurar event listeners para modales y botones de tema y modo
     document.getElementById('figuresTitle').addEventListener('click', () => import('./ui.js').then(ui => ui.openFiguresModal()));
@@ -207,12 +282,7 @@ export function initializeRouter() {
         switchToClassic();
     });
     
-    // Inicializar tema por defecto DESPUÉS de configurar todo
-    setTimeout(() => {
-        const themeConfig = getThemeConfig(gameState.currentTheme);
-        mutations.setDataSource(themeConfig.data);
-        console.log('🎯 Router inicializado, dataSource cargado:', themeConfig.data.length, 'items');
-    }, 100);
+    console.log('🎯 Router inicializado - esperando selección de tema');
 }
 
 // ══════════════════════════════════════════════════════════════

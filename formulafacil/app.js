@@ -26,16 +26,31 @@ async function initializeApp() {
         // Esperar un momento para que todo se cargue
         await new Promise(resolve => setTimeout(resolve, 200));
         
-        // Forzar carga del tema por defecto
-        const { getThemeConfig } = await import('./core/themes.js');
-        const { mutations } = await import('./core/state.js');
-        const themeConfig = getThemeConfig('geometry');
-        mutations.setDataSource(themeConfig.data);
-        console.log('🎯 Tema geometry forzado:', themeConfig.data?.length);
+        // Inicializar el estado del juego
+        const { gameState, mutations } = await import('./core/state.js');
         
-        // Iniciar juego en modo classic por defecto
-        newGame();
-        console.log('🎮 Juego iniciado');
+        // Inicializar juego en modo classic por defecto
+        mutations.setMode('classic');
+        
+        // Cargar geometría por defecto al inicio
+        console.log('🔄 Cargando geometría por defecto al inicio...');
+        
+        // Asegurar que el selector1 esté visible
+        const selector1 = document.getElementById('themeSelector1');
+        const selector2 = document.getElementById('themeSelector2');
+        if (selector1) selector1.style.display = '';
+        if (selector2) selector2.style.display = 'none';
+        
+        // Activar botón de geometría
+        document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+        const geometryBtn = document.getElementById('geometryBtn');
+        if (geometryBtn) geometryBtn.classList.add('active');
+        
+        // Cargar tema geometría
+        const { onThemeChange } = await import('./core/router.js');
+        await onThemeChange('geometry');
+        
+        console.log('✅ Geometría cargada por defecto');
         
         console.log('✅ Fórmula Fácil - Aplicación inicializada correctamente');
     } catch (error) {
@@ -74,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('📋 Modo actual:', currentMode);
 
             if (parcial === '1') {
+                console.log('🔄 Mostrando Parcial 1, ocultando Parcial 2');
                 selector1.style.display = '';
                 selector2.style.display = 'none';
                 
@@ -85,51 +101,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (geometryBtn) geometryBtn.classList.add('active');
                 // Usar onThemeChange para cargar todo correctamente
                 const { onThemeChange } = await import('./core/router.js');
-                onThemeChange('geometry');
+                await onThemeChange('geometry');
             } else {
+                console.log('🔄 Mostrando Parcial 2, ocultando Parcial 1');
                 selector1.style.display = 'none';
                 selector2.style.display = '';
+                console.log('🔄 themeSelector2 display:', selector2.style.display);
                 
-                if (temasParcial1.includes(currentTheme)) {
-                    // Mapear el tema del Parcial 1 al Parcial 2
-                    console.log('🔄 Mapeando tema del Parcial 1 al Parcial 2');
-                    const mapeoTema = {
-                        'geometry': 'trigonometria',
-                        'functions': 'logaritmos',
-                        'inequalities': 'vectores',
-                        'absolute-value': 'homograficas',
-                        'intervals': 'inyectivas'
-                    };
-                    const temaMapeado = mapeoTema[currentTheme] || 'logaritmos';
-                    console.log('🎯 Tema mapeado:', temaMapeado);
-                    // Quitar active de todos los botones de tema
-                    document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
-                    const themeBtn = document.querySelector(`[data-theme="${temaMapeado}"]`);
-                    if (themeBtn) themeBtn.classList.add('active');
-                    // Usar onThemeChange para cargar todo correctamente
-                    const { onThemeChange } = await import('./core/router.js');
-                    onThemeChange(temaMapeado);
-                } else if (temasParcial2.includes(currentTheme)) {
-                    // Mantener el tema actual (ya está en Parcial 2)
-                    console.log('✅ Manteniendo tema actual:', currentTheme);
-                    // Quitar active de todos los botones de tema
-                    document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
-                    const themeBtn = document.querySelector(`[data-theme="${currentTheme}"]`);
-                    if (themeBtn) themeBtn.classList.add('active');
-                    // Usar onThemeChange para cargar todo correctamente
-                    const { onThemeChange } = await import('./core/router.js');
-                    onThemeChange(currentTheme);
-                } else {
-                    // Ir al primer tema del Parcial 2
-                    console.log('🎯 Ir al primer tema del Parcial 2');
-                    // Quitar active de todos los botones de tema
-                    document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
-                    const firstBtn = selector2.querySelector('.theme-btn');
-                    if (firstBtn) firstBtn.classList.add('active');
-                    // Usar onThemeChange para cargar todo correctamente
-                    const { onThemeChange } = await import('./core/router.js');
-                    onThemeChange('logaritmos');
-                }
+                // Para Parcial 2, simplemente ir al primer tema sin mapeo
+                console.log('🎯 Ir al primer tema del Parcial 2');
+                console.log('🔍 Buscando botones en themeSelector2:', selector2);
+                // Quitar active de todos los botones de tema
+                document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+                const firstBtn = selector2.querySelector('.theme-btn');
+                console.log('🔍 Primer botón encontrado:', firstBtn);
+                console.log('🔍 Botón trigonometriaBtn:', document.getElementById('trigonometriaBtn'));
+                if (firstBtn) firstBtn.classList.add('active');
+                // Usar onThemeChange para cargar todo correctamente
+                const { onThemeChange } = await import('./core/router.js');
+                await onThemeChange('trigonometria');
             }
         });
     });
