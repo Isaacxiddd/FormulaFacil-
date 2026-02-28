@@ -1,26 +1,35 @@
-# 📐 FormulaFacil UTN - Juego Educativo de Fórmulas Matemáticas
+📐 FormulaFacil UTN
 
-## 🎓 **Proyecto Desarrollado para Ingreso UTN FRBA**
+Juego educativo que hice mientras estudiaba para el ingreso a la Universidad Tecnológica Nacional 
 
-Juego educativo interactivo diseñado para facilitar el aprendizaje y memorización de fórmulas matemáticas, con énfasis en trigonometría, geometría, funciones y otros temas del ingreso a la Universidad Tecnológica Nacional Facultad Regional Buenos Aires.
+La idea del proyecto es tener una forma más práctica de repasar fórmulas matemáticas sin depender solamente de apuntes. Funciona como un juego de asociación donde el objetivo es relacionar conceptos con sus fórmulas.
 
----
+Las fórmulas se muestran en formato matemático para una mejor visualización.
 
-## 🎯 **Objetivo del Proyecto**
-
-Crear una herramienta educativa accesible y efectiva que permita a los estudiantes del ingreso UTN:
-- 📚 **Memorizar fórmulas** mediante juego de asociación
-- 🧮 **Visualizar expresiones** matemáticas con MathJax
-- 🌙 **Estudiar en modo oscuro** para reducir fatiga visual
-- 📱 **Acceder desde cualquier dispositivo** (responsive design)
-- 🎮 **Aprender mediante práctica** y repetición espaciada
+El proyecto está pensado principalmente para temas del ingreso como geometría, trigonometría, funciones, vectores.
 
 ---
 
-## 🏗️ **Arquitectura del Sistema**
+Objetivo del proyecto
 
-### **📁 Estructura de Directorios**
-```
+Hice este proyecto para practicar fórmulas del ingreso a la UTN de una forma más interactiva.
+
+La idea es que el estudiante pueda:
+
+* memorizar fórmulas mediante repetición
+* ver las expresiones matemáticas renderizadas correctamente
+* estudiar usando modo oscuro
+* usar la aplicación desde celular o computadora
+* practicar con un sistema tipo juego
+
+---
+
+ Arquitectura del sistema
+
+📁 Estructura de directorios
+
+
+
 formulafacil/
 ├── index.html              # Página principal
 ├── styles.css              # Estilos CSS completos
@@ -52,234 +61,192 @@ formulafacil/
     ├── fueguito.png       # Mascota principal
     ├── fueguito3.png      # Mascota alternativa
     └── logofmt.png        # Logo FormulaFacil
-```
-
-### **🔧 Componentes Principales**
-
-#### **1. Sistema de Juego (`core/game.js`)**
-- **Modo Clásico:** Asociación figura-fórmula
-- **Modo Práctica:** Ejercicios guiados
-- **Sistema de puntuación:** Aciertos, precisión, racha
-- **Dinámica de tarjetas:** Shuffle, matching, feedback
-
-#### **2. Gestión de Temas (`core/themes.js`)**
-- **9 temas principales:** Geometría, Funciones, Trigonometría, etc.
-- **Configuración modular:** Cada tema con datos y fórmulas
-- **Sistema de parciales:** Primer y segundo parcial
-- **Navegación dinámica:** Cambio instantáneo entre temas
-
-#### **3. Motor Matemático (`MathJax 3.2.2`)**
-- **Renderizado LaTeX:** Fórmulas matemáticas profesionales
-- **Configuración optimizada:** Delimitadores `\[...\]` y `\(...\)`
-- **Soporte completo:** Fracciones, raíces, integrales, etc.
-
-#### **4. Sistema de UI/UX (`core/ui.js`)**
-- **Modo oscuro:** Tema UTN morado completo
-- **Diseño responsivo:** Adaptación móvil/tablet/desktop
-- **Animaciones fluidas:** Transiciones y micro-interacciones
-- **Feedback visual:** Colores, estados, loading
 
 ---
 
-## 📊 **Características Destacadas**
+Componentes principales
 
-### **🔢 Trigonometría Completa (66 fórmulas)**
-- **Funciones recíprocas:** csc, sec, cot
-- **Identidades pitagóricas:** 3 variantes
-- **Ángulo doble:** 4 formas diferentes
-- **Ángulo triple:** sen(3x), cos(3x), tan(3x)
-- **Ángulo mitad:** 6 variantes con raíces
-- **Suma/Diferencia:** sen, cos, tan
-- **Transformaciones:** Suma→Producto (4 tipos)
-- **Reducción de potencias:** sen²x, cos²x
-- **Leyes de triángulos:** Seno, Coseno (3 formas)
-- **Paridad:** Funciones pares e impares
-- **Cofunciones:** Relaciones π/2 ± x
-- **Ecuaciones trigonométricas:** Soluciones generales
+Sistema del juego
 
-### **🎨 Diseño UTN**
-- **Paleta morada:** Colores institucionales UTN
-- **Modo oscuro:** Reducción de fatiga visual
-- **Branding oficial:** Logo UTN y mascota Fueguito
-- **Interfaz limpia:** Minimalista y funcional
+El juego funciona con tarjetas que se mezclan aleatoriamente.
+El objetivo es encontrar la relación entre un concepto y su fórmula de una forma mas visual.
 
-### **⚡ Rendimiento**
-- **Carga rápida:** < 2 segundos inicial
-- **Optimización:** 5.04 MB totales
-- **Sin dependencias:** Vanilla JavaScript
-- **Compatibilidad:** Navegadores modernos
+También se registran estadísticas básicas como:
+
+* cantidad de aciertos
+* precisión
+* racha de respuestas correctas
 
 ---
 
-## 🛠️ **Tecnologías Utilizadas**
+Sistema de temas
 
-### **Frontend:**
-- **HTML5:** Estructura semántica
-- **CSS3:** Flexbox, Grid, Animaciones
-- **JavaScript ES6+:** Módulos, clases, async/await
-- **MathJax 3.2.2:** Renderizado matemático
+Los contenidos están organizados por temas matemáticos.
+Cada tema contiene su propia lista de fórmulas.
 
-### **Herramientas:**
-- **Git:** Control de versiones
-- **VS Code:** Desarrollo
-- **PowerShell:** Automatización
-- **Python:** Servidor local
+Esto permite agregar nuevos temas sin tener que modificar el resto del proyecto.
 
 ---
 
-## 🎮 **Modos de Juego**
+Renderizado matemático
 
-### **1. Modo Clásico**
-- **Objetivo:** Asociar figuras con fórmulas
-- **Mecánica:** Tarjetas interactivas con shuffle
-- **Puntuación:** Aciertos, precisión, racha máxima
-- **Dificultad:** Progresiva según rendimiento
+Las fórmulas se muestran en formato LaTeX y se visualizan correctamente en el navegador.
 
-### **2. Modo Práctica**
-- **Objetivo:** Resolver ejercicios guiados
-- **Mecánica:** Problemas con ayuda paso a paso
-- **Feedback:** Explicaciones detalladas
-- **Progresión:** Por temas y dificultad
+Esto incluye:
+
+* fracciones
+* raíces
+* potencias
+* identidades trigonométricas
 
 ---
 
-## 📱 **Diseño Responsivo**
+Interfaz
 
-### **Desktop (1200px+):**
-- Grid 4x4 de tarjetas
-- Panel lateral de información
-- Animaciones completas
+El menu y está pensada para que sea rápida de usar.
 
-### **Tablet (768px-1199px):**
-- Grid 3x3 adaptado
-- Interfaz táctil optimizada
-- Botones más grandes
+Incluye:
 
-### **Móvil (320px-767px):**
-- Grid 2x2 compacto
-- Navegación por gestos
-- Modo retrato/landscape
+* animaciones básicas
+* diseño responsive
+* un menu simple 
 
 ---
 
-## 🌙 **Modo Oscuro**
+Contenido de trigonometría
 
-### **Características:**
-- **Tema UTN morado:** Gradientes y sombras institucionales
-- **Alto contraste:** Texto blanco sobre fondos oscuros
-- **Transiciones suaves:** Animaciones entre modos
-- **Persistencia:** Preferencia guardada en localStorage
+El módulo de trigonometría incluye varias identidades importantes del ingreso.
 
-### **Implementación:**
-- **CSS Variables:** Sistema dinámico de colores
-- **Clase .dark-mode:** Toggle con JavaScript
-- **Iconos dinámicos:** 🌙/☀️ según estado
-- **Universal:** Todos los componentes adaptados
+Entre ellas:
 
----
-
-## 🚀 **Deploy y Producción**
-
-### **Ambientes:**
-- **Local:** Python HTTP Server (desarrollo)
-- **Staging:** Vercel (testing)
-- **Producción:** Neocities (actual)
-
-### **Optimizaciones:**
-- **Minificación:** CSS y JavaScript
-- **Compresión:** Imágenes optimizadas
-- **CDN:** MathJax desde CDN
-- **Cache:** Estrategia de caché eficiente
+* funciones recíprocas (sec, csc, cot)
+* identidades pitagóricas
+* ángulo doble
+* ángulo triple
+* ángulo mitad
+* suma y diferencia de ángulos
+* reducción de potencias
+* leyes del seno y coseno
+* paridad de funciones
+* cofunciones
+* ecuaciones trigonométricas básicas
 
 ---
 
-## 📈 **Métricas y Estadísticas**
+Tecnologías utilizadas
 
-### **Contenido:**
-- **66 fórmulas trigonométricas**
-- **200+ fórmulas totales** (todos los temas)
-- **9 temas educativos**
-- **2 modos de juego**
+Frontend:
 
-### **Rendimiento:**
-- **< 2s** tiempo de carga
-- **60fps** animaciones fluidas
-- **100%** compatibilidad móvil
-- **A+** rendimiento en Lighthouse
+* HTML5
+* CSS3
+* JavaScript
+* MathJax
 
----
+Herramientas usadas durante el desarrollo:
 
-## 🎓 **Contexto Educativo**
-
-### **Público Objetivo:**
-- **Estudiantes UTN FRBA:** Ingreso a ingeniería
-- **Nivel educativo:** Nivel medio/superior
-- **Edad:** 17-25 años
-- **Contexto:** Preparación para exámenes
-
-### **Alineación Curricular:**
-- **Matemática I:** Geometría y trigonometría
-- **Matemática II:** Funciones y análisis
-- **Ingreso UTN:** Temas específicos del examen
-- **Práctica:** Repetición espaciada y activa
+* Git
+* VS Code
+* Python (para servidor local)
 
 ---
 
-## 🔮 **Visión Futura**
+Modos de uso
 
-### **Mejoras Planificadas:**
-- **Progreso del usuario:** Guardar avances
-- **Modo multijugador:** Competencias online
-- **Análisis de rendimiento:** Estadísticas detalladas
-- **Expansión de temas:** Más áreas matemáticas
-- **API de ejercicios:** Generador dinámico
+Modo clásico
 
-### **Escalabilidad:**
-- **Arquitectura modular:** Fácil adición de temas
-- **Sistema de plugins:** Extensiones futuras
-- **Internacionalización:** Múltiples idiomas
-- **Accesibilidad:** WCAG 2.1 compliance
+En este modo aparecen tarjetas que deben asociarse correctamente.
 
----
+El juego mezcla las cartas y el usuario debe encontrar la relación entre concepto y fórmula.
 
-## 👥 **Desarrollo y Contribuciones**
+Se registran:
 
-### **Creado por:**
-- **Estudiantes UTN FRBA:** Proyecto educativo
-- **Propósito:** Facilitar el ingreso a la universidad
-- **Tecnología:** Vanilla JavaScript y MathJax
-- **Diseño:** UX/UI centrado en el aprendizaje
-
-### **Licencia:**
-- **MIT:** Uso libre y abierto
-- **Educativo:** Sin fines comerciales
-- **Colaborativo:** Bienvenidas las contribuciones
+* aciertos
+* precisión
+* racha máxima
 
 ---
 
-## 🌐 **Acceso y Deploy**
+Modo práctica
 
-### **Producción:**
-- **URL Principal:** https://formulafaciutn.neocities.org
-- **Alternativa:** https://formulafacil-utn.vercel.app
+Este modo está pensado para repasar fórmulas de forma más activa .
 
-### **Desarrollo:**
-- **Repositorio:** GitHub (próximamente)
-- **Local:** Python HTTP Server
-- **Testing:** Vercel staging
+(recomendacion personal usar calculadora)
 
 ---
 
-## 📞 **Contacto y Soporte**
+Diseño responsive
 
-### **Proyecto Educativo:**
-- **Finalidad:** Apoyo al ingreso UTN
-- **Sin fines comerciales:** 100% educativo
-- **Código abierto:** Para la comunidad estudiantil
-- **Mejoras continuas:** Basadas en feedback
+La aplicación funciona en distintos tamaños de pantalla.
+
+Desktop
+
+* grilla de tarjetas más grande
+* mayor espacio visual
+
+Tablet
+
+* interfaz adaptada para pantalla táctil
+
+Móvil
+
+* grilla compacta
+* botones más grandes
 
 ---
 
-**🎓 FormulaFacil UTN - Herramienta educativa creada por estudiantes, para estudiantes.**
+Modo oscuro
 
-*Facilitando el camino a la ingeniería UTN FRBA, una fórmula a la vez.* 🚀
+El proyecto incluye un modo oscuro para estudiar con menos fatiga visual.
+
+La preferencia se guarda en el navegador usando localStorage.
+
+---
+
+Deploy
+
+El proyecto se puede ejecutar localmente con un servidor simple.
+
+Durante el desarrollo utilicé un servidor de Python.
+
+También se hicieron pruebas de deploy en:
+
+* Vercel
+* Neocities
+
+---
+
+Futuras mejoras
+
+Algunas ideas para seguir mejorando el proyecto:
+
+* guardar progreso del usuario
+* estadísticas más detalladas
+* agregar más temas matemáticos
+* generar ejercicios automáticamente
+
+---
+
+Proyecto educativo
+
+Este proyecto fue creado como herramienta de práctica para estudiantes que estén preparando el ingreso a la UTN.
+
+No tiene fines comerciales y puede usarse libremente para estudiar.
+
+---
+
+Acceso al proyecto
+
+Producción:
+
+https://formulafaciutn.neocities.org
+
+Alternativa:
+
+https://formulafacil-utn.vercel.app
+
+---
+
+FormulaFacil UTN
+
+Proyecto hecho para practicar fórmulas matemáticas del ingreso a la UTN.
+
