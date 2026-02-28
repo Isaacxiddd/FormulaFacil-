@@ -70,7 +70,7 @@ export const functionsData = [
     {
         name: "Punto medio",
         category: "lineal",
-        formulas: "\\left(\\frac{x_1+x_2}{2}, \\frac{y_1+y_2}{2}\\right)",
+        formulas: "\left(\\frac{x_1+x_2}{2}, \\frac{y_1+y_2}{2}\\right)",
         icon: "⊙",
         svg: `<svg viewBox="0 0 100 100"><line x1="20" y1="70" x2="80" y2="30" stroke="#cddc39" stroke-width="2"/><circle cx="20" cy="70" r="4" fill="#8bc34a"/><circle cx="80" cy="30" r="4" fill="#8bc34a"/><circle cx="50" cy="50" r="5" fill="#ff5722"/></svg>`
     },
@@ -107,7 +107,7 @@ export const functionsData = [
     {
         name: "Vértice",
         category: "cuadratica",
-        formulas: "\\left(-\\frac{b}{2a}, -\\frac{\\Delta}{4a}\\right)",
+        formulas: "\left(-\\frac{b}{2a}, -\\frac{\\Delta}{4a}\\right)",
         icon: "🔝",
         svg: `<svg viewBox="0 0 100 100"><path d="M 10 90 Q 50 20 90 90" stroke="#00bcd4" stroke-width="3" fill="none"/><circle cx="50" cy="20" r="5" fill="#ff5722"/><line x1="50" y1="20" x2="50" y2="95" stroke="#666" stroke-width="1" stroke-dasharray="2,2"/><line x1="10" y1="20" x2="50" y2="20" stroke="#666" stroke-width="1" stroke-dasharray="2,2"/></svg>`
     },
@@ -226,7 +226,7 @@ export const functionsFormulasData = [
     },
     {
         name: "Punto medio",
-        formulas: ["\\left(\\frac{x_1+x_2}{2}, \\frac{y_1+y_2}{2}\\right)"],
+        formulas: ["\left(\\frac{x_1+x_2}{2}, \\frac{y_1+y_2}{2}\\right)"],
         explanation: "El punto medio es el punto que se encuentra exactamente a la mitad del segmento que une dos puntos.",
         variables: [
             "M: Punto medio",
@@ -392,7 +392,7 @@ export const functionsFormulasData = [
     },
     {
         name: "Vértice",
-        formulas: ["\\left(-\\frac{b}{2a}, -\\frac{\\Delta}{4a}\\right)", "V(x_v, y_v)"],
+        formulas: ["\left(-\\frac{b}{2a}, -\\frac{\\Delta}{4a}\\right)", "V(x_v, y_v)"],
         explanation: "El vértice es el punto máximo (si a<0) o mínimo (si a>0) de la parábola. Es el punto más alto o más bajo de la curva.",
         variables: [
             "V: Vértice de la parábola",

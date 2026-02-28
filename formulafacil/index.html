@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memoriza Fórmulas - Geometría, Funciones e Inecuaciones</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="logo-utn.png">
@@ -23,6 +31,11 @@
                 <a href="https://www.instagram.com/franjamoradautn/" target="_blank" rel="noopener">
                     <img src="logofmt.png" alt="FMT" class="fmt-logo">
                 </a>
+            </div>
+            <div class="dark-mode-toggle">
+                <button id="darkModeBtn" class="dark-mode-btn" title="Cambiar a modo oscuro">
+                    <span class="dark-mode-icon">🌙</span>
+                </button>
             </div>
         </div>
         <h2>Creado por Isaac Garcia</h2>
@@ -65,10 +78,6 @@
         
         <!-- Selector de tema (Parcial 2) -->
         <div class="theme-selector" id="themeSelector2" style="display: none;">
-            <button id="logaritmosBtn" class="theme-btn" data-theme="logaritmos">
-                <span class="theme-icon">log</span>
-                <span class="theme-text">Logaritmos</span>
-            </button>
             <button id="trigonometriaBtn" class="theme-btn" data-theme="trigonometria">
                 <span class="theme-icon">〰️</span>
                 <span class="theme-text">Trigonometría</span>
@@ -223,5 +232,7 @@
     
     <!-- ES Module Principal -->
     <script type="module" src="app.js"></script>
+    <!-- Modo Oscuro -->
+    <script src="core/darkmode.js"></script>
 </body>
 </html>
